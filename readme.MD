@@ -1,54 +1,71 @@
-# # Sample project template for ISP (SE) labs
+# Lab 9
 
-Project dependencies:
-- Maven 3 
-- Java 1.8 (11 or 17)
+**Stocks Portfolio Management Application**
 
-In order to run the project, execute the following command from the root directory (pom.xml should be in this path).
+Note: The project uses Lombok. 
+Please install the Lombok plugin. **In IntelliJ: File->Settings...->Plugins - search 'Lombok'**
 
-At run time, the main method of the class specified in the pom.xml file through the 'mainClass' property will be called:
+## Exercise 1 
 
-    <mainClass>Example</mainClass>
+Implement a basic stock portfolio tracker application starting from the example provided in package exercise 1.
 
-To pass arguments in the command line when using maven, the element 'commandlineArgs' in the pom.xml file will be modified according to the following example:
+The aplication should provide following functionalities:
+- Authentication (Login) - finish the login implementation. Currently, the credentials are not verified; anyone can access the application.
 
-    <commandlineArgs>-jar ${project.build.directory}/${project.build.finalName}-${shadedClassifierName}.jar arg1 arg2</commandlineArgs>
+![login image](./docs/login.png)
 
-## Running the tests
+- View market stocks and their current value - this feature is implemented and can be used as reference for next exercises;
 
-To run the unit tests, execute the following command: 
+![market image](./docs/market.png)
 
-    mvn test
+- View user portofolio owned stocks
+    - View owned stocks in a table view similar to Market;
+    - For each owned stock display in table followings: symbol, quantity, price per unit, total price of the position;
+    - Also add available funds (cash).
 
-## Running the application 
+![portfolio image](./docs/portfolio.png)
 
-    mvn compile exec:java 
+- Buy stock:
+    - Implement "Buy" button functionality;
+    - Buy is limited by available cache funds (stored in Portfolio class, attribute "cash");
 
-## Default running
+![buy image](./docs/buy.png)
 
-To perform a complete compile, test and run cycle execute the command:
+- Sell stock
+    - Create user interface similar to Buy interface
+    - Symbol dropdown button should display only stocks owned by user;
+    - When the sell is completed, the available funds should increase with the value of the transaction;
 
-    mvn
+![sell image](./docs/sell.png)
+ 
 
-Through the 'mvn' command, maven will run the 'default maven goals' set in the pom.xml file, namely:
+### Implementation notes
 
-    <defaultGoal>clean compile package exec:java</defaultGoal> 
+Note 1 - Stock symbols are hardcoded in StockMarketQueryService      private String[] symbols = new String[] {"INTC", "BABA", "TSLA", "AIR.PA", "MSFT", "AAPL", etc.}; You can add your own symbol as long as correspond to some real market symbols.
 
-## Alternate run using mvn wrapper
+Note 2 - For getting financial market information the application use https://financequotes-api.com/ library:
 
-Alternatively, the previous commands can be run using the mvn wrapper (https://github.com/takari/maven-wrapper); the 'mvnw' command can be used if maven is not installed. Example:
+        <dependency>
+            <groupId>com.yahoofinance-api</groupId>
+            <artifactId>YahooFinanceAPI</artifactId>
+            <version>3.15.0</version>
+        </dependency>
 
-    mvnw test 
-    
-## Generating the javadoc documentation
+## Exercise 2
 
-To generate the project documentation, the next command will be executed:
+Create UML Class diagram and insert it bellow.
 
-    mvn javadoc:javadoc
-   
-## The ISP (SE) laboratory tools
-
-![GitHub Logo](docs/ClassDiagram1.jpg)
-     
+----- UML CLASS DIAGRAM -------
 
 
+## Exercise 3 (Optional)
+
+Study MVC design pattern and how this can be implemented in Java. Here is a link presenting how MVC pattern can be implemented:
+- https://examples.javacodegeeks.com/core-java/java-swing-mvc-example/ 
+
+## Exercise 4 (Optional)
+
+Add a layer of persistence to your application:
+- Save the accounts in a file on the disk.
+- Save the user's portfolios on the disk. Keep in mind that you can have multiple users.
+- You can use either Java's native serialization support or the JSON format.
