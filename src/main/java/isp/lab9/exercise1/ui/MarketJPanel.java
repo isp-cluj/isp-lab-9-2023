@@ -6,11 +6,11 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MarkeJPanel extends JPanel {
+public class MarketJPanel extends JPanel {
 
     private StockMarketJFrame frame;
 
-    public MarkeJPanel(StockMarketJFrame frame){
+    public MarketJPanel(StockMarketJFrame frame){
         this.frame = frame;
         initComponent();
     }

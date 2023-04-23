@@ -48,7 +48,7 @@ public class StockMarketJFrame extends JFrame {
 
         // configure windows the tabs
         JTabbedPane tabs = new JTabbedPane();
-        tabs.addTab("Market", new MarkeJPanel(this));
+        tabs.addTab("Market", new MarketJPanel(this));
         tabs.addTab("Portfolio", new PortofolioJPanel());
         tabs.addTab("Buy", new BuyJPanel(this));
         tabs.addTab("Sell", new SellJPanel());
