@@ -70,11 +70,8 @@ public class StockMarketJFrame extends JFrame {
         jTableMarket.setModel(marketService);
         JScrollPane marketScrollablePane = new JScrollPane(jTableMarket);
 
-        JPanel refreshButtonPanel = new JPanel();
-        refreshButtonPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
         JButton refreshButton = new JButton("Refresh");
         refreshButton.addActionListener(evt -> buttonRefreshActionPerformed(evt));
-        refreshButtonPanel.add(refreshButton);
 
         marketPanel.add(marketScrollablePane);
         marketPanel.add(refreshButton);
