@@ -1,4 +1,4 @@
-package isp.lab9.exercise1;
+package isp.lab9.exercise1.ui;
 
 import javax.swing.*;
 import java.util.HashMap;
@@ -8,10 +8,10 @@ import java.util.Map;
  * @author mihai.hulea
  * @author radu.miron
  */
-public class LoginFrame extends JFrame {
+public class LoginJFrame extends JFrame {
     public static final Map<String, String> accounts = new HashMap<>();
 
-    public LoginFrame() {
+    public LoginJFrame() {
         //setup the window
         this.setTitle("Login");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -50,7 +50,7 @@ public class LoginFrame extends JFrame {
     }
 
     private void verifyCredentials(JTextField userInputField, JPasswordField pwdInputField) {
-        LoginFrame.this.setVisible(false);
+        LoginJFrame.this.setVisible(false);
         new StockMarketJFrame();
 
         // todo: implement the login by checking the credentials
