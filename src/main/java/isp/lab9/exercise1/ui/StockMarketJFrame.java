@@ -4,7 +4,7 @@
  */
 package isp.lab9.exercise1.ui;
 
-import isp.lab9.exercise1.services.Portfolio;
+import isp.lab9.exercise1.services.UserPortfolio;
 import isp.lab9.exercise1.services.StockMarketQueryService;
 
 import javax.swing.*;
@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class StockMarketJFrame extends JFrame {
     private StockMarketQueryService marketService;
-    private Portfolio portfolio;
+    private UserPortfolio portfolio;
 
     /**
      * Creates new form StockMarketJFrame
@@ -30,7 +30,7 @@ public class StockMarketJFrame extends JFrame {
             marketService = new StockMarketQueryService();
             marketService.refreshMarketData();
 
-            portfolio = new Portfolio(new BigDecimal(1000), new TreeMap<>());
+            portfolio = new UserPortfolio(new BigDecimal(1000), new TreeMap<>());
         } catch (IOException ex) {
             Logger.getLogger(StockMarketJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -45,11 +45,10 @@ public class StockMarketJFrame extends JFrame {
     private void initComponents() {
         this.setSize(700, 400);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
         // configure windows the tabs
         JTabbedPane tabs = new JTabbedPane();
         tabs.addTab("Market", new MarketJPanel(this));
-        tabs.addTab("Portfolio", new PortofolioJPanel());
+        tabs.addTab("UserPortfolio", new PortofolioJPanel());
         tabs.addTab("Buy", new BuyJPanel(this));
         tabs.addTab("Sell", new SellJPanel());
 
@@ -60,7 +59,7 @@ public class StockMarketJFrame extends JFrame {
         return marketService;
     }
 
-    public Portfolio getPortfolio() {
+    public UserPortfolio getPortfolio() {
         return portfolio;
     }
 }
