@@ -6,7 +6,6 @@
 package isp.lab9.exercise1.services;
 
 import lombok.Data;
-import yahoofinance.Stock;
 
 import java.math.BigDecimal;
 
@@ -25,13 +24,4 @@ public class StockItem {
     private String currency;
     private String exchange;
     private String name;
-
-    StockItem(Stock stock) {
-        price = stock.getQuote().getPrice();
-        change = stock.getQuote().getChangeInPercent();
-        symbol = stock.getSymbol();
-        currency = stock.getCurrency();
-        exchange = stock.getStockExchange();
-        name = stock.getName();
-    }
 }

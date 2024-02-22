@@ -5,36 +5,30 @@
  */
 package isp.lab9.exercise0;
 
-import yahoofinance.Stock;
-import yahoofinance.YahooFinance;
+import isp.lab9.exercise1.services.StockItem;
+import isp.lab9.exercise1.services.YahooWebClient;
 
 import java.math.BigDecimal;
-import java.util.Map;
 
 /**
  * @author mihai.hulea
  */
 public class Main {
     public static void main(String[] args) throws Exception {
+        StockItem stock = YahooWebClient.get("INTC");
 
-        Stock stock = YahooFinance.get("INTC");
+        BigDecimal price = stock.getPrice();
+        BigDecimal change = stock.getChange();
+        //etc.
 
-        BigDecimal price = stock.getQuote().getPrice();
-        BigDecimal change = stock.getQuote().getChangeInPercent();
-        BigDecimal peg = stock.getStats().getPeg();
-        BigDecimal dividend = stock.getDividend().getAnnualYieldPercent();
-
-        stock.print();
-
+        System.out.println(stock);
         System.out.println("*************************************");
+
+
         String[] symbols = new String[]{"INTC", "BABA", "TSLA", "AIR.PA", "YHOO"};
-        Map<String, Stock> stocks = YahooFinance.get(symbols); // single request
-        Stock intel = stocks.get("INTC");
-        Stock airbus = stocks.get("AIR.PA");
-
-        intel.print();
+        YahooWebClient.get(symbols)
+                .forEach(System.out::println);
         System.out.println("*************************************");
-        airbus.print();
 
     }
 }

@@ -43,12 +43,12 @@ The aplication should provide following functionalities:
 
 Note 1 - Stock symbols are hardcoded in StockMarketQueryService      private String[] symbols = new String[] {"INTC", "BABA", "TSLA", "AIR.PA", "MSFT", "AAPL", etc.}; You can add your own symbol as long as correspond to some real market symbols.
 
-Note 2 - For getting financial market information the application use https://financequotes-api.com/ library:
+Note 2 - For getting financial market information the application uses htmlunit library, which consumes the Yahoo Finance API:
 
         <dependency>
-            <groupId>com.yahoofinance-api</groupId>
-            <artifactId>YahooFinanceAPI</artifactId>
-            <version>3.15.0</version>
+            <groupId>net.sourceforge.htmlunit</groupId>
+            <artifactId>htmlunit</artifactId>
+            <version>2.70.0</version>
         </dependency>
 
 ## Exercise 2
