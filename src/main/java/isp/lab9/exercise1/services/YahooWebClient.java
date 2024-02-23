@@ -23,6 +23,7 @@ public class YahooWebClient {
     private static final String YAHOO_FINANCE_URL = "https://finance.yahoo.com/?guccounter=1";
     private static final String CRUMB_URL = "https://query1.finance.yahoo.com/v1/test/getcrumb";
     private static final String QUOTES_QUERY1V7_BASE_URL = "https://query1.finance.yahoo.com/v7/finance/quote";
+    private static final String CRUMB_ERR_MSG = "Unable to get the crumb";
     private static WebClient webClient;
     private static String crumb;
 
@@ -62,15 +63,20 @@ public class YahooWebClient {
             HtmlPage home = getWebClient().getPage(YAHOO_FINANCE_URL);
 
             //select Agree button and accept the cookies by clicking it
-            HtmlButton agreeButton = (HtmlButton)
-                    home.getByXPath("//button[@name='agree']").stream().findFirst().orElse(null);
+            HtmlButton agreeButton = (HtmlButton) home.getByXPath("//button[@name='agree']").stream()
+                    .findFirst().orElseThrow(() -> new RuntimeException(CRUMB_ERR_MSG));
             agreeButton.click();
 
             //now, you have all the needed cookies in webClient; you can retrieve the crumb
 
             //get the crumb
             WebRequest crumbRequest = new WebRequest(new URL(CRUMB_URL));
-            crumb = ((TextPage) getWebClient().getPage(crumbRequest)).getContent();
+            crumb = ((TextPage) getWebClient().getPage(crumbRequest)).getContent().trim();
+
+            if (crumb.isEmpty()) {
+                throw new RuntimeException(CRUMB_ERR_MSG);
+            }
+
             System.out.println("Got crumb: " + crumb);
         }
     }
