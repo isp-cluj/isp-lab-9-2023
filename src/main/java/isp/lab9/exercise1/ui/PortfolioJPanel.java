@@ -6,6 +6,6 @@ import javax.swing.*;
  *  todo: implement portfolio panel; for each owned stock add symbol, quantity, price per unit, total price of the position
  *  it should look similar to the 'Market' panel
  */
-public class PortofolioJPanel extends JPanel {
+public class PortfolioJPanel extends JPanel {
 
 }
