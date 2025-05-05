@@ -1,9 +1,6 @@
 package isp.lab9.exercise1.services;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.TextPage;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequest;
+import com.gargoylesoftware.htmlunit.*;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import isp.lab9.exercise1.utils.Utils;
@@ -52,6 +49,9 @@ public class YahooWebClient {
         if (webClient == null) {
             webClient = new WebClient(BrowserVersion.CHROME);
             webClient.getOptions().setJavaScriptEnabled(true);
+            webClient.getOptions().setThrowExceptionOnScriptError(false);
+            webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
+            webClient.setCssErrorHandler(new SilentCssErrorHandler());
         }
 
         return webClient;
