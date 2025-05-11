@@ -41,13 +41,19 @@ public class YahooWebClient {
         params.put("symbols", query);
         params.put("crumb", crumb);
         String url = QUOTES_QUERY1V7_BASE_URL + "?" + Utils.getURLParameters(params);
-        String stocksJson = getWebClient().getPage(url).getWebResponse().getContentAsString();
+        String stocksJson = getWebClient().getPage(url).getWebResponse().getContentAsString().trim();
+
+        if (!stocksJson.startsWith("{") && !stocksJson.startsWith("[")) {
+            throw new IOException("Invalid response from Yahoo (not JSON): " + stocksJson);
+        }
+
         return Utils.parseStocksJson(stocksJson);
     }
 
     private static WebClient getWebClient() throws IOException {
         if (webClient == null) {
             webClient = new WebClient(BrowserVersion.CHROME);
+            webClient.addRequestHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
             webClient.getOptions().setJavaScriptEnabled(true);
             webClient.getOptions().setThrowExceptionOnScriptError(false);
             webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
@@ -71,7 +77,8 @@ public class YahooWebClient {
 
             //get the crumb
             WebRequest crumbRequest = new WebRequest(new URL(CRUMB_URL));
-            crumb = ((TextPage) getWebClient().getPage(crumbRequest)).getContent().trim();
+            Page crumbPage = getWebClient().getPage(crumbRequest);
+            crumb = crumbPage.getWebResponse().getContentAsString().trim();
 
             if (crumb.isEmpty()) {
                 throw new RuntimeException(CRUMB_ERR_MSG);
