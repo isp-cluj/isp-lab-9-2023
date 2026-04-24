@@ -19,7 +19,7 @@ import java.util.List;
 public class StockMarketQueryService extends AbstractTableModel {
     private String[] columns = new String[]{"Name", "Symbol", "Price", "Currency", "Change", "Exchange"};
     private String[] symbols = new String[]{"INTC", "BABA", "TSLA", "AIR.PA", "MSFT", "AAPL",
-            "OHI", "MPW", "MMM", "SWK", "PFE", "ABBV", "JNJ", "MDT", "RIO", "EPD", "ET", "USA",
+            "OHI", "MMM", "SWK", "PFE", "ABBV", "JNJ", "MDT", "RIO", "EPD", "ET", "USA",
             "BHP", "BP", "BCE", "VZ", "GOOG"};
     private List<StockItem> items = new ArrayList<>();
 
@@ -43,7 +43,7 @@ public class StockMarketQueryService extends AbstractTableModel {
      */
     public BigDecimal getStockPrice(String symbol) throws IOException {
         StockItem stock = YahooWebClient.get(symbol);
-        return stock.getPrice();
+        return stock.price();
     }
 
     /**
@@ -72,18 +72,18 @@ public class StockMarketQueryService extends AbstractTableModel {
 
         switch (columnIndex) {
             case 0:
-                return i.getName();
+                return i.name();
             case 1:
-                return i.getSymbol();
+                return i.symbol();
             case 2:
-                if (i.getPrice() != null) return i.getPrice().toPlainString();
+                if (i.price() != null) return i.price().toPlainString();
                 else return "N/A";
             case 3:
-                return i.getCurrency();
+                return i.currency();
             case 4:
-                return i.getChange().toPlainString() + "%";
+                return i.change().toPlainString() + "%";
             case 5:
-                return i.getExchange();
+                return i.exchange();
         }
         return "N/A";
     }

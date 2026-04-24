@@ -17,15 +17,14 @@ public class Main {
     public static void main(String[] args) throws Exception {
         StockItem stock = YahooWebClient.get("INTC");
 
-        BigDecimal price = stock.getPrice();
-        BigDecimal change = stock.getChange();
+        BigDecimal price = stock.price();
+        BigDecimal change = stock.change();
         //etc.
 
         System.out.println(stock);
         System.out.println("*************************************");
 
-
-        String[] symbols = new String[]{"INTC", "BABA", "TSLA", "AIR.PA", "YHOO"};
+        String[] symbols = new String[]{"INTC", "BABA", "TSLA", "AIR.PA", "VZ"};
         YahooWebClient.get(symbols)
                 .forEach(System.out::println);
         System.out.println("*************************************");

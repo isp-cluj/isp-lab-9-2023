@@ -83,26 +83,20 @@ public class Utils {
 
     private static StockItem parseJson(JsonNode node) {
         String symbol = node.get("symbol").asText();
-        StockItem stock = new StockItem();
-        stock.setSymbol(symbol);
 
-        if (node.has("longName")) {
-            stock.setName(node.get("longName").asText());
-        } else {
-            stock.setName(getStringValue(node, "shortName"));
-        }
+        String name = node.has("longName") ?
+            node.get("longName").asText() :
+            getStringValue(node, "shortName");
 
-        stock.setCurrency(getStringValue(node, "currency"));
-        stock.setExchange(getStringValue(node, "fullExchangeName"));
+        String currency = getStringValue(node, "currency");
+        String exchange = getStringValue(node, "fullExchangeName");
 
         BigDecimal price = getBigDecimal(getStringValue(node, "regularMarketPrice"));
         BigDecimal previousClose = getBigDecimal(getStringValue(node, "regularMarketPreviousClose"));
         BigDecimal change = price != null && previousClose != null ? price.subtract(previousClose) : null;
+        change = getPercent(change, previousClose);
 
-        stock.setPrice(price);
-        stock.setChange(getPercent(change, previousClose));
-
-        return stock;
+        return new StockItem(symbol, price, change, currency, exchange, name);
     }
 
     private static String getStringValue(JsonNode node, String field) {

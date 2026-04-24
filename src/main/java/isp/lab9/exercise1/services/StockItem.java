@@ -5,8 +5,6 @@
  */
 package isp.lab9.exercise1.services;
 
-import lombok.Data;
-
 import java.math.BigDecimal;
 
 /**
@@ -16,12 +14,15 @@ import java.math.BigDecimal;
  * @author radu.miron
  */
 
-@Data // at compile time, it creates getters, setters, equals(), hashCode() and toString()
-public class StockItem {
-    private String symbol;
-    private BigDecimal price;
-    private BigDecimal change;
-    private String currency;
-    private String exchange;
-    private String name;
+public record StockItem(
+        String symbol,
+        BigDecimal price,
+        BigDecimal change,
+        String currency,
+        String exchange,
+        String name) {
+    public StockItem() {
+        this(null, new BigDecimal(0), new BigDecimal(0), null, null, null);
+    }
 }
+
