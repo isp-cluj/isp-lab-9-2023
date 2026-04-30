@@ -81,7 +81,7 @@ public class YahooWebClient {
             HtmlPage home = getWebClient().getPage(YAHOO_FINANCE_URL);
 
             //select Agree button and accept the cookies by clicking it
-            HtmlButton agreeButton = (HtmlButton) home.getByXPath("//button[@name='agree'),").stream()
+            HtmlButton agreeButton = (HtmlButton) home.getByXPath("//button[@name='agree']").stream()
                     .findFirst().orElseThrow(() -> new RuntimeException(CRUMB_ERR_MSG));
             agreeButton.click();
 
