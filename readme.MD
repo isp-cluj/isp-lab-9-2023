@@ -2,9 +2,6 @@
 
 **Stocks Portfolio Management Application**
 
-Note: The project uses Lombok. 
-Please install the Lombok plugin. **In IntelliJ: File->Settings...->Plugins - search 'Lombok'**
-
 ## Exercise 1 
 
 Implement a basic stock portfolio tracker application starting from the example provided in package exercise 1.
